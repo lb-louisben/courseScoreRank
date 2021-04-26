@@ -1,0 +1,33 @@
+CREATE DATABASE assignment;
+USE assignment;
+create table score
+(
+    ID          int auto_increment
+        primary key,
+    NAME        varchar(100) not null,
+    scoreCN     int          not null,
+    scoreMATH   int          not null,
+    scoreENG    int          not null,
+    scoreSCI    int          not null,
+    totalSCORES int          not null
+);
+
+INSERT INTO score (ID, NAME, scoreCN, scoreMATH, scoreENG, scoreSCI, totalSCORES)
+VALUES (20210001, 'LOUIS', 110, 100, 140, 220, scoreCN + scoreMATH + scoreENG + scoreSCI),
+       (20120002, 'FOLDER', 115, 125, 100, 230, scoreCN + scoreMATH + scoreENG + scoreSCI),
+       (20210003, 'ABC_yl', 120, 130, 90, 237, scoreCN + scoreMATH + scoreENG + scoreSCI),
+       (20210004, 'JUSTIN', 107, 118, 135, 123, scoreCN + scoreMATH + scoreENG + scoreSCI);
+
+/*sql语句   排序*/
+SELECT ID,
+       NAME,
+       scoreCN,
+       scoreMATH,
+       scoreENG,
+       scoreSCI,
+       totalSCORES,
+       DENSE_RANK() OVER (
+           ORDER BY totalSCORES
+           ) RANKING
+FROM score;
+
